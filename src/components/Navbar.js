@@ -17,13 +17,13 @@ export default class Navbar extends Component {
                                 <a class="nav-link" href="/">Home</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="/graph">Trend</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="/goals">Goals</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Trend</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                                <a class="nav-link" href="/limits">Limits</a>
                             </li>
                         </ul>
                     </div>

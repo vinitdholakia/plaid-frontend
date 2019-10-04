@@ -16,7 +16,7 @@ export default class GoalListItem extends Component {
         const goal = this.props.goal;
         return (
             <div>
-                <Link to="/goals/details" class="list-group-item list-group-item-action">
+                <Link to={`/goals/${goal.id}`} class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1"><i class={goal.icon} style={{ color: 'pink' }}></i>&nbsp; {goal.title}</h5>
                         <small class="text-muted">Due : {goal.due}</small>
@@ -26,8 +26,10 @@ export default class GoalListItem extends Component {
                         <small class="text-muted">Target : ${goal.target}</small>
                     </div>
                     <div class="progress" style={{ margin: "auto" }}>
-                        <div class="progress-bar bg-success" role="progressbar" style={this.getPercentage()} aria-valuemin="0" aria-valuenow={this.getPercentagevalue()} aria-valuemax={goal.target}>${goal.fulfilled}</div>
+                        {goal.fulfilled < 0 ? <div class="progress-bar bg-success" role="progressbar" style={{width:"0%"}} aria-valuemin="0" aria-valuenow="0" aria-valuemax={goal.target}>-${-1*goal.fulfilled}</div>:<div class="progress-bar bg-success" role="progressbar" style={this.getPercentage()} aria-valuemin="0" aria-valuenow={this.getPercentagevalue()} aria-valuemax={goal.target}>${goal.fulfilled}</div>}
+                        
                     </div>
+                    <small>{goal.warn > 0 ? <span style={{color:"red"}}>Event pushed by {goal.warn} days</span> : (goal.warn < 0? <span style={{color:"#228B22"}}>Saving {-1 * goal.warn} days</span>:'On Track')}</small>
                 </Link>
             </div>
         )

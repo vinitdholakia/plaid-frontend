@@ -1,36 +1,31 @@
 import React, { Component } from 'react'
 import GoalListItem from './GoalListItem';
+import axios from 'axios';
 let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 export default class Goals extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            goals: [{
-                title : "Marriage",
-                icon:"fa fa-heart",
-                target : "20000",
-                fulfilled : "4000",
-                transactions : "24",
-                due:"10/10/2020"
-            },{
-                title : "Car",
-                icon:"fa fa-car",
-                target : "35000",
-                fulfilled : "17320",
-                transactions : "103",
-                due:"10/11/2020"
-            },{
-                title : "Home",
-                icon:"fa fa-home",
-                target : "835000",
-                fulfilled : "117000",
-                transactions : "401",
-                due:"10/11/2024"
-            }],
+            goals: [],
             newItem: {
                 recurring: true
             }
         }
+    }
+    componentDidMount= ()=>{
+        axios.get('http://localhost:8000/api/goals').then(d=>{
+            this.setState({
+                goals:d.data
+            })
+        })
+        setInterval(()=>{
+            axios.get('http://localhost:8000/api/goals').then(d=>{
+            this.setState({
+                goals:d.data
+            })
+        })
+        },5000)
+        
     }
     render() {
         let dates = [];
@@ -80,16 +75,6 @@ export default class Goals extends Component {
                                         {!this.state.newItem.recurring ? <select class="custom-select custom-select-md mb-3" style={{ width: "30%", margin: "auto" }}>
                                             {years.map((e, i) => <option value={e}>{e}</option>)}
                                         </select> : ""}
-
-                                        {/* <div class="col-md-4 col-sm-2 mb-2" >
-                                            <input type="number" class="form-control" id="validationTooltip03" placeholder="Month" required />
-                                        </div>
-                                        <div class="col-md-4 col-sm-4 mb-2" style={{ width: "30%" }}>
-                                            <input type="number" class="form-control" id="validationTooltip03" placeholder="Date" required />
-                                        </div>
-                                        <div class="col-md-4 col-sm-4 mb-2" style={{ width: "30%" }}>
-                                            <input type="number" class="form-control" id="validationTooltip03" placeholder="Year" required />
-                                        </div> */}
                                     </div>
                                 </form>
                             </div>

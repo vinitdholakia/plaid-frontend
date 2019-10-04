@@ -52,5 +52,30 @@
   integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
   integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+<script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
+<script>
+  (function () {
+    let lsData = localStorage.getItem("registered");
+    console.log("LS DATA", lsData);
+    if (!lsData) {
+      var products = 'transactions'.split(',');
+      var handler = Plaid.create({
+        apiVersion: 'v2',
+        clientName: 'Plaid Quickstart',
+        env: 'sandbox',
+        product: products,
+        key: 'a0e6c0b1a178c9e885e19266009198',
+        countryCodes: "US,CA,GB,FR,ES".split(','),
+        // webhook: 'https://your-domain.tld/plaid-webhook',
+        onSuccess: function (public_token) {
+          localStorage.setItem("registered", public_token)
+        },
+      });
+      handler.open()
+    }
+
+  })()
+</script>
 
 </html>
