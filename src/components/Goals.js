@@ -1,12 +1,34 @@
 import React, { Component } from 'react'
+import GoalListItem from './GoalListItem';
 let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-let dates = [];
 export default class Goals extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            newItem : {
-                recurring : true
+            goals: [{
+                title : "Marriage",
+                icon:"fa fa-heart",
+                target : "20000",
+                fulfilled : "4000",
+                transactions : "24",
+                due:"10/10/2020"
+            },{
+                title : "Car",
+                icon:"fa fa-car",
+                target : "35000",
+                fulfilled : "17320",
+                transactions : "103",
+                due:"10/11/2020"
+            },{
+                title : "Home",
+                icon:"fa fa-home",
+                target : "835000",
+                fulfilled : "117000",
+                transactions : "401",
+                due:"10/11/2024"
+            }],
+            newItem: {
+                recurring: true
             }
         }
     }
@@ -58,7 +80,7 @@ export default class Goals extends Component {
                                         {!this.state.newItem.recurring ? <select class="custom-select custom-select-md mb-3" style={{ width: "30%", margin: "auto" }}>
                                             {years.map((e, i) => <option value={e}>{e}</option>)}
                                         </select> : ""}
-                                        
+
                                         {/* <div class="col-md-4 col-sm-2 mb-2" >
                                             <input type="number" class="form-control" id="validationTooltip03" placeholder="Month" required />
                                         </div>
@@ -79,24 +101,7 @@ export default class Goals extends Component {
                     </div>
                 </div>
                 <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1"><i class="fa fa-heart" style={{ color: 'red' }}></i>&nbsp; Marriage</h5>
-                            <small class="text-muted">Due : 10/10/2020</small>
-                        </div>
-
-                        <br></br>
-                        <div class="d-flex w-100 justify-content-between">
-                            <p class="mb-1">24 transactions</p>
-                            <small class="text-muted">Target : $500</small>
-                        </div>
-                        <div class="progress" style={{ margin: "auto" }}>
-                            <div class="progress-bar bg-success" role="progressbar" style={{ width: "90%" }} aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">$300</div>
-                        </div>
-                        {/* <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                        <small class="text-muted">Donec id elit non mi porta.</small> */}
-                    </a>
-
+                    {this.state.goals.map(e => <GoalListItem goal={e}/>)}
                 </div>
                 <button type="button" class="btn btn-secondary btn-circle btn-lg" data-toggle="modal" data-target="#exampleModal" style={{ position: "fixed", bottom: "20px", right: "20px" }}><i class="fa fa-plus"></i>
                 </button>

@@ -9,9 +9,8 @@ function Card(props) {
                     (
                         <div class="card text-center" style={{ width: "90%", margin: "auto", marginBottom: '20px' }}>
                             <div class="card-body">
-                                <h5 class="card-title">Entertainment</h5>
-                                <p>$300</p>
-                                <p><small>Last updated 3 mins ago</small></p>
+                                <h5 class="card-title">{tile.name}</h5>
+                                <p>${tile.amount}</p>
                             </div>
                         </div>
                     )

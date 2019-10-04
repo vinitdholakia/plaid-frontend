@@ -4,16 +4,18 @@ import './App.css';
 import Navbar from './components/Navbar'
 import HomePage from './components/HomePage';
 import Goals from './components/Goals';
-import {BrowserRouter as Router , Route} from 'react-router-dom';
+import GoalDetails from './components/GoalDetails';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 function App() {
   return (
     <div className="App">
-      <Navbar/>
+      <Navbar />
       <Router>
-        <div>
+        <Switch>
+          <Route path="/goals/details" render={(props) => <GoalDetails {...props} />} />
           <Route path="/goals" render={(props) => <Goals {...props} />} />
           <Route exact path="/" render={(props) => <HomePage {...props} />} />
-        </div>
+        </Switch>
       </Router>
     </div>
   );
